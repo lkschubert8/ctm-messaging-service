@@ -18,3 +18,7 @@ An application for sending and receiving messages via a 3rd party SMS service
 - cd into client directory
 - npm install
 - npm start
+
+### Usage 
+- navigate to localhost:3000 in your browser
+
