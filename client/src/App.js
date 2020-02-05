@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Fragment } from "react";
+import Media from "react-media";
 import "bulma/css/bulma.css";
 import CommunicationList from "./components/CommunicationList";
 import MessageList from "./components/MessageList";
@@ -40,38 +41,96 @@ function App() {
   const [selectedCommunication, setSelectedCommunication] = useState(null);
   const [displayNewCommunication, setDisplayNewCommunication] = useState(false);
 
-  
   return (
-    <div className="columns" style={{height: "100vh"}}>
-      <CommunicationList
-        className="column is-3"
-        communications={communications}
-        selectedCommunication={selectedCommunication}
-        setSelectedCommunication={setSelectedCommunication}
-        addCommunication={e => setDisplayNewCommunication(true)}
-      ></CommunicationList>
-      <MessageList
-        className="column"
-        selectedCommunication={selectedCommunication}
-        sendMessage={sendMessage}
-      ></MessageList>
-      <div className={`modal ${displayNewCommunication ? "is-active" : ""}`}>
-        <div className="modal-background"></div>
-        <div className="modal-content">
-          <div className="box">
-            <button
-              class="modal-close is-large"
-              aria-label="close"
-              onClick={_ => setDisplayNewCommunication(false)}
-            ></button>
-            <NewCommunication
-              initiateCommunication={initiateCommunication}
-              close={_ => setDisplayNewCommunication(false)}
-            ></NewCommunication>
-          </div>
-        </div>
-      </div>
-    </div>
+    <Media //Changes the layout based on browserWidth
+      queries={{
+        small: "(max-width : 599px)",
+        large: "(min-width: 600px)"
+      }}
+    >
+      {matches => (
+        <Fragment>
+          {matches.small && (
+            <div style={{ height: "100vh" }}>
+              {selectedCommunication === null ? (
+                <CommunicationList
+                  className=""
+                  communications={communications}
+                  selectedCommunication={selectedCommunication}
+                  setSelectedCommunication={setSelectedCommunication}
+                  addCommunication={e => setDisplayNewCommunication(true)}
+                ></CommunicationList>
+              ) : (
+                <MessageList
+                  className="column"
+                  selectedCommunication={selectedCommunication}
+                  back={e => setSelectedCommunication(null)}
+                  sendMessage={sendMessage}
+                ></MessageList>
+              )}
+              <div
+                className={`modal ${
+                  displayNewCommunication ? "is-active" : ""
+                }`}
+              >
+                <div className="modal-background"></div>
+                <div className="modal-content">
+                  <div className="box">
+                    <button
+                      class="modal-close is-large"
+                      aria-label="close"
+                      onClick={_ => setDisplayNewCommunication(false)}
+                    ></button>
+                    <NewCommunication
+                      initiateCommunication={initiateCommunication}
+                      close={_ => setDisplayNewCommunication(false)}
+                    ></NewCommunication>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+          {matches.large && (
+            <Fragment>
+              <div className="columns" style={{ height: "100vh" }}>
+                <CommunicationList
+                  className="column is-3"
+                  communications={communications}
+                  selectedCommunication={selectedCommunication}
+                  setSelectedCommunication={setSelectedCommunication}
+                  addCommunication={e => setDisplayNewCommunication(true)}
+                ></CommunicationList>
+                <MessageList
+                  className="column"
+                  selectedCommunication={selectedCommunication}
+                  sendMessage={sendMessage}
+                ></MessageList>
+                <div
+                  className={`modal ${
+                    displayNewCommunication ? "is-active" : ""
+                  }`}
+                >
+                  <div className="modal-background"></div>
+                  <div className="modal-content">
+                    <div className="box">
+                      <button
+                        class="modal-close is-large"
+                        aria-label="close"
+                        onClick={_ => setDisplayNewCommunication(false)}
+                      ></button>
+                      <NewCommunication
+                        initiateCommunication={initiateCommunication}
+                        close={_ => setDisplayNewCommunication(false)}
+                      ></NewCommunication>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </Fragment>
+          )}
+        </Fragment>
+      )}
+    </Media>
   );
 }
 

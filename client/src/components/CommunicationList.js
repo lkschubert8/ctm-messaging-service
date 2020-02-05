@@ -4,7 +4,8 @@ import Communication from "./Communication";
 let CommunicationList = props => {
   return (
     <aside className="menu" style={{ backgroundColor: "#EEEEEE",
-                                     padding: "1%"}}>
+                                     padding: "1%",
+                                     height: "100%"}}>
       <p className="menu-label">Communications</p>
       <ul className="menu-list">
         {props.communications.map(comm => (
