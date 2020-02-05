@@ -29,4 +29,4 @@ An application for sending and receiving messages via a 3rd party SMS service
   then sends off. This would allow support for backoff when issues arise with the twilio service
   and a dead letter queue.
 - The polling request that gets the current message for a communication could be converted to websockets
-
+- Replace the regex phone validation with twilio's phone validation api (didn't get a SID for this service, need to pay)
