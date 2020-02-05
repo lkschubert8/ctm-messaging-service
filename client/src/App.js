@@ -44,8 +44,8 @@ function App() {
   return (
     <Media //Changes the layout based on browserWidth
       queries={{
-        small: "(max-width : 599px)",
-        large: "(min-width: 600px)"
+        small: "(max-width : 768px)", //Matches bulma's distinction between mobile and desktop
+        large: "(min-width: 769px)"
       }}
     >
       {matches => (
