@@ -35,7 +35,7 @@ let MessageList = props => {
     }
   }, [props.selectedCommunication]);
 
-  if (props.selectedCommunication !== null) {
+  if (props.selectedCommunication !== null) { //If no communication is selected prompt user to select communication
     return (
       <div
         style={{

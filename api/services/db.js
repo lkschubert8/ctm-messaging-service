@@ -15,6 +15,9 @@ class Db {
         })
     }
 
+    /**
+     * Migrates the schema
+     */
     initializeDatabase() {
         const messageSchema = fs.readFileSync("./sql/Messages.sql", "utf8");
         const communicationSchema = fs.readFileSync("./sql/Communications.sql", "utf8");
@@ -24,6 +27,7 @@ class Db {
             
         });
     }
+
 
     createCommunication(name, phoneNumber) {
         return new Promise((resolve, reject) => {
@@ -77,9 +81,8 @@ class Db {
 
     getCommunicationMessages(communicationId) {
         return new Promise((resolve, reject) => {
-            this.db.all("SELECT * FROM messages WHERE communicationId = ?", [communicationId], (err, results) => {
+            this.db.all("SELECT * FROM messages WHERE communicationId = ? ORDER BY timestamp ASC", [communicationId], (err, results) => {
                 if (err) {
-                    console.log("ERROR - error running get communications");
                     reject(err);
                 } else {
                     resolve(results);

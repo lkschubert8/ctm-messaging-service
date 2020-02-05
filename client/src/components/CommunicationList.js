@@ -16,7 +16,7 @@ let CommunicationList = props => {
           ></Communication>
         ))}
       </ul>
-      <button style={{marginTop: "2vh"}}
+      <button style={{marginTop: "1%"}}
         className="button is-primary is-light"
         onClick={props.addCommunication}
       >

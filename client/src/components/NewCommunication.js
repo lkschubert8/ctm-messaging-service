@@ -7,19 +7,20 @@ let NewCommunication = props => {
   const [errorMessage, setErrorMessage] = useState(null);
   const [pending, setPending] = useState(false);
   const handleSubmit = event => {
-    debugger;
     event.preventDefault();
     setErrorMessage(null);
     setPending(true);
     
+    //Validate all form fields have values
     if(!name || !phone || !message){
       setErrorMessage("All fields are required");
-      return;
+      return false;
     }
 
+    //Validate phone number
     if(!isValidPhoneNumber(phone)){
       setErrorMessage("Invalid phone number format");
-      return;
+      return false;
     }
     props.initiateCommunication(name, phone, message).then(res => {
       setPending(false)

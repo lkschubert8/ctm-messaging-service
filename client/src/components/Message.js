@@ -12,8 +12,9 @@ let Message = props => {
           : "has-background-light"
       }`}
       style={{ width: "45%",
-               marginLeft: props.message.source ? "1%" : "auto",
-               marginRight: props.message.source ? "auto": "1%",
+               marginLeft: props.message.source ? "1%" : "auto", //used to put outbound messages on the right
+                                                                 //and inbound messages on the left
+               marginRight: props.message.source ? "auto": "1%", 
                padding: "1%"
                 }}
     >
